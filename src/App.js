@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import CreateRecipe from "./pages/CreateRecipe";
+import { Menu } from "semantic-ui-react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    activeItem: "AromApp"
+  };
+
+  handleItemClick = (e, { name }) =>
+    this.setState({
+      activeItem: name
+    });
+
+  render() {
+    const { activeItem } = this.state;
+    return (
+      <>
+        <Menu color="red" inverted>
+          <Menu.Item
+            header
+            name="AromApp"
+            className="AromApp"
+            onClick={this.handleItemClick}
+          >
+            AromApp
+          </Menu.Item>
+          <Menu.Item
+            name="Create Recipe"
+            active={activeItem === "Create Recipe"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="List Recipes"
+            active={activeItem === "List Recipes"}
+            onClick={this.handleItemClick}
+          />
+        </Menu>
+        <CreateRecipe />
+      </>
+    );
+  }
 }
-
-export default App;
