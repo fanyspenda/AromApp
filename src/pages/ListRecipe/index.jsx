@@ -15,15 +15,29 @@ export default class ListRecipe extends React.Component {
     });
   };
 
+  handleCardClick = (recipe, urlImage) => {
+    recipe.urlImage = urlImage;
+    this.props.history.push("/detailrecipe", { recipe });
+  };
+
   render() {
     return (
       <>
         <Segment basic>
           <Card.Group>
             {this.state.recipes.map((recipe, index) => (
-              <Card centered color="red">
+              <Card
+                centered
+                color="red"
+                onClick={() =>
+                  this.handleCardClick(
+                    recipe,
+                    "https://www.shape.com/sites/shape.com/files/styles/slide/public/keycombos.jpg"
+                  )
+                }
+              >
                 <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+                  src="https://www.shape.com/sites/shape.com/files/styles/slide/public/keycombos.jpg"
                   wrapped
                   ui={true}
                 />
