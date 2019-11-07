@@ -1,6 +1,9 @@
 import React from "react";
-import CreateRecipe from "./pages/CreateRecipe";
 import { Menu } from "semantic-ui-react";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+
+import CreateRecipe from "./pages/CreateRecipe";
+import ListRecipe from "./pages/ListRecipe";
 
 export default class App extends React.Component {
   state = {
@@ -16,27 +19,35 @@ export default class App extends React.Component {
     const { activeItem } = this.state;
     return (
       <>
-        <Menu color="red" inverted>
-          <Menu.Item
-            header
-            name="AromApp"
-            className="AromApp"
-            onClick={this.handleItemClick}
-          >
-            AromApp
-          </Menu.Item>
-          <Menu.Item
-            name="Create Recipe"
-            active={activeItem === "Create Recipe"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="List Recipes"
-            active={activeItem === "List Recipes"}
-            onClick={this.handleItemClick}
-          />
-        </Menu>
-        <CreateRecipe />
+        <Router>
+          <Menu color="red" inverted>
+            <Menu.Item
+              header
+              name="AromApp"
+              className="AromApp"
+              onClick={this.handleItemClick}
+            >
+              AromApp
+            </Menu.Item>
+            <Menu.Item
+              name="Create Recipe"
+              as={Link}
+              to="/createrecipe"
+              active={activeItem === "Create Recipe"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="List Recipes"
+              as={Link}
+              to="/"
+              active={activeItem === "List Recipes"}
+              onClick={this.handleItemClick}
+            />
+          </Menu>
+
+          <Route path="/" exact component={ListRecipe} />
+          <Route path="/createrecipe" exact component={CreateRecipe} />
+        </Router>
       </>
     );
   }

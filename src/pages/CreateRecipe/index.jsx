@@ -73,6 +73,18 @@ export default class CreateRecipe extends React.Component {
     });
   };
 
+  handleNameChange = event => {
+    this.setState({
+      name: event.target.value
+    });
+  };
+
+  handleDescriptionChange = event => {
+    this.setState({
+      description: event.target.value
+    });
+  };
+
   handleDeleteStepClick = () => {
     let stepsCopy = this.state.steps;
     stepsCopy.pop();
@@ -113,11 +125,22 @@ export default class CreateRecipe extends React.Component {
           <Form>
             <Label size="large">Nama Resep</Label>
             <Form.Field>
-              <Input />
+              <Input
+                fluid
+                value={this.state.name}
+                placeholder="Mau nulis resep apa?"
+                onChange={this.handleNameChange}
+              />
             </Form.Field>
             <Label size="large">Deskripsi</Label>
             <Form.Field>
-              <TextArea style={{ resize: "none" }} rows="5" />
+              <TextArea
+                style={{ resize: "none" }}
+                rows="5"
+                value={this.state.description}
+                onChange={this.handleDescriptionChange}
+                placeholder="jelasin dong masakan ini seperti apa.."
+              />
             </Form.Field>
             <br />
             <br />
