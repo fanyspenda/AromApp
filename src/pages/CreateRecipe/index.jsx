@@ -25,7 +25,8 @@ export default class CreateRecipe extends React.Component {
         price: 0
       }
     ],
-    steps: ["a", "b", "c"]
+    steps: ["a", "b", "c"],
+    price: 0
   };
 
   handleAddIngredientClick = () => {
@@ -85,6 +86,12 @@ export default class CreateRecipe extends React.Component {
     });
   };
 
+  handlePriceCompleteChange = event => {
+    this.setState({
+      price: event.target.value
+    });
+  };
+
   handleDeleteStepClick = () => {
     let stepsCopy = this.state.steps;
     stepsCopy.pop();
@@ -102,13 +109,14 @@ export default class CreateRecipe extends React.Component {
   };
 
   handleSubmitClick = () => {
-    const { name, description, ingredients, steps } = this.state;
+    const { name, description, ingredients, steps, price } = this.state;
     axios
       .post("https://arom-app-backend.herokuapp.com/recipe", {
         name,
         description,
         ingredients,
-        steps
+        steps,
+        price
       })
       .then(() => {
         alert("Berhasil memasukkan resep baru!");
@@ -140,6 +148,16 @@ export default class CreateRecipe extends React.Component {
                 value={this.state.description}
                 onChange={this.handleDescriptionChange}
                 placeholder="jelasin dong masakan ini seperti apa.."
+              />
+            </Form.Field>
+            <Label size="large">Harga Masakan Jadi</Label>
+            <Form.Field>
+              <Input
+                fluid
+                value={this.state.price}
+                type="number"
+                placeholder="Harga jadinya berapa ya?"
+                onChange={this.handlePriceCompleteChange}
               />
             </Form.Field>
             <br />
@@ -188,6 +206,7 @@ export default class CreateRecipe extends React.Component {
                     <Input
                       fluid
                       label="Harga"
+                      type="number"
                       value={ingredient.price}
                       onChange={event => this.handlePriceChange(event, index)}
                     />
