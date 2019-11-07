@@ -1,6 +1,6 @@
 import { Card, Image, Segment, Grid } from "semantic-ui-react";
 import React from "react";
-import Axios from "axios";
+import axios from "axios";
 
 export default class ListRecipe extends React.Component {
   state = {
@@ -8,7 +8,7 @@ export default class ListRecipe extends React.Component {
   };
 
   componentDidMount = () => {
-    Axios.get("https://arom-app-backend.herokuapp.com/recipe").then(res => {
+    axios.get("https://arom-app-backend.herokuapp.com/recipe").then(res => {
       this.setState({
         recipes: res.data
       });
@@ -19,7 +19,7 @@ export default class ListRecipe extends React.Component {
     recipe.urlImage = urlImage;
     this.props.history.push("/detailrecipe", { recipe });
   };
-
+  
   render() {
     return (
       <>
