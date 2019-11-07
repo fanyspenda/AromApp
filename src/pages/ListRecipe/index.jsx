@@ -1,6 +1,6 @@
 import { Card, Image, Segment, Grid } from "semantic-ui-react";
 import React from "react";
-import Axios from "axios";
+import axios from "axios";
 
 export default class ListRecipe extends React.Component {
   state = {
@@ -8,22 +8,36 @@ export default class ListRecipe extends React.Component {
   };
 
   componentDidMount = () => {
-    Axios.get("https://arom-app-backend.herokuapp.com/recipe").then(res => {
+    axios.get("https://arom-app-backend.herokuapp.com/recipe").then(res => {
       this.setState({
         recipes: res.data
       });
     });
   };
 
+  handleCardClick = (recipe, urlImage) => {
+    recipe.urlImage = urlImage;
+    this.props.history.push("/detailrecipe", { recipe });
+  };
+  
   render() {
     return (
       <>
         <Segment basic>
           <Card.Group>
             {this.state.recipes.map((recipe, index) => (
-              <Card centered color="red">
+              <Card
+                centered
+                color="red"
+                onClick={() =>
+                  this.handleCardClick(
+                    recipe,
+                    "https://www.shape.com/sites/shape.com/files/styles/slide/public/keycombos.jpg"
+                  )
+                }
+              >
                 <Image
-                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+                  src="https://www.shape.com/sites/shape.com/files/styles/slide/public/keycombos.jpg"
                   wrapped
                   ui={true}
                 />

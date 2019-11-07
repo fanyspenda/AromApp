@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import CreateRecipe from "./pages/CreateRecipe";
 import ListRecipe from "./pages/ListRecipe";
+import DetailRecipe from "./pages/DetailRecipe";
 
 export default class App extends React.Component {
   state = {
@@ -47,6 +48,7 @@ export default class App extends React.Component {
 
           <Route path="/" exact component={ListRecipe} />
           <Route path="/createrecipe" exact component={CreateRecipe} />
+          <Route path="/detailrecipe" exact component={DetailRecipe} />
         </Router>
       </>
     );
