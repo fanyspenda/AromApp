@@ -16,6 +16,7 @@ export default class DetailRecipe extends React.Component {
     description: this.recipe.description,
     ingredients: this.recipe.ingredients,
     steps: this.recipe.steps,
+    price: this.recipe.price,
     urlImage: this.recipe.urlImage
   };
 
@@ -40,6 +41,17 @@ export default class DetailRecipe extends React.Component {
           <p>{this.state.description}</p>
           <br />
           <br />
+
+          <Label size="big" color="red">
+            <Header as="h2" inverted textAlign="center">
+              Harga Masakan Jadi
+            </Header>
+          </Label>
+          <Divider />
+          <p>{this.state.price}</p>
+          <br />
+          <br />
+
           <Label size="big" color="red">
             <Header as="h2" inverted textAlign="center">
               Bahan dan Harga
