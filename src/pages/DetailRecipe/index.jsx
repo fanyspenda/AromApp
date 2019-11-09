@@ -15,9 +15,21 @@ export default class DetailRecipe extends React.Component {
     name: this.recipe.name,
     description: this.recipe.description,
     ingredients: this.recipe.ingredients,
+    totalIngredientPrice: 0,
     steps: this.recipe.steps,
     price: this.recipe.price,
-    urlImage: this.recipe.urlImage
+    urlImage: this.recipe.image_url
+  };
+
+  componentDidMount = () => {
+    let totalPrice = 0;
+    this.recipe.ingredients.map((ingredient, index) => {
+      totalPrice += ingredient.price;
+    });
+
+    this.setState({
+      totalIngredientPrice: totalPrice
+    });
   };
 
   render() {
@@ -44,16 +56,6 @@ export default class DetailRecipe extends React.Component {
 
           <Label size="big" color="red">
             <Header as="h2" inverted textAlign="center">
-              Harga Masakan Jadi
-            </Header>
-          </Label>
-          <Divider />
-          <p>{this.state.price}</p>
-          <br />
-          <br />
-
-          <Label size="big" color="red">
-            <Header as="h2" inverted textAlign="center">
               Bahan dan Harga
             </Header>
           </Label>
@@ -73,6 +75,36 @@ export default class DetailRecipe extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             ))}
+            <Grid.Row>
+              <Grid.Column computer="8" mobile="8">
+                <h2>Total Harga</h2>
+              </Grid.Column>
+              <Grid.Column computer="8" mobile="8" textAlign="right">
+                {this.state.totalIngredientPrice < this.state.price ? (
+                  <h2
+                    style={{ color: "#25cc00" }}
+                  >{`Rp. ${this.state.totalIngredientPrice}`}</h2>
+                ) : (
+                  <h2
+                    style={{ color: "red" }}
+                  >{`Rp. ${this.state.totalIngredientPrice}`}</h2>
+                )}
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column computer="8" mobile="8">
+                <h2>Harga Masakan Jadi</h2>
+              </Grid.Column>
+              <Grid.Column computer="8" mobile="8" textAlign="right">
+                {this.state.totalIngredientPrice > this.state.price ? (
+                  <h2
+                    style={{ color: "#25cc00" }}
+                  >{`Rp. ${this.state.price}`}</h2>
+                ) : (
+                  <h2 style={{ color: "red" }}>{`Rp. ${this.state.price}`}</h2>
+                )}
+              </Grid.Column>
+            </Grid.Row>
           </Grid>
 
           <br />

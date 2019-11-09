@@ -19,7 +19,7 @@ export default class ListRecipe extends React.Component {
     recipe.urlImage = urlImage;
     this.props.history.push("/detailrecipe", { recipe });
   };
-  
+
   render() {
     return (
       <>
@@ -29,18 +29,9 @@ export default class ListRecipe extends React.Component {
               <Card
                 centered
                 color="red"
-                onClick={() =>
-                  this.handleCardClick(
-                    recipe,
-                    "https://www.shape.com/sites/shape.com/files/styles/slide/public/keycombos.jpg"
-                  )
-                }
+                onClick={() => this.handleCardClick(recipe)}
               >
-                <Image
-                  src="https://www.shape.com/sites/shape.com/files/styles/slide/public/keycombos.jpg"
-                  wrapped
-                  ui={true}
-                />
+                <Image src={recipe.image_url} wrapped ui={true} />
                 <Card.Content>
                   <Card.Header>
                     <p

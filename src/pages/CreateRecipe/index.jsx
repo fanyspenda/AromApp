@@ -15,6 +15,7 @@ export default class CreateRecipe extends React.Component {
   state = {
     name: "",
     description: "",
+    image: null,
     ingredients: [
       {
         name: "bawang putih",
@@ -109,7 +110,7 @@ export default class CreateRecipe extends React.Component {
   };
 
   handleSubmitClick = () => {
-    const { name, description, ingredients, steps, price } = this.state;
+    const { name, description, ingredients, steps, price, image } = this.state;
     axios
       .post("https://arom-app-backend.herokuapp.com/recipe", {
         name,
@@ -118,9 +119,26 @@ export default class CreateRecipe extends React.Component {
         steps,
         price
       })
-      .then(() => {
-        alert("Berhasil memasukkan resep baru!");
+      .then(res => {
+        const { data } = res;
+        const formData = new FormData();
+        formData.append("image", this.state.image);
+
+        axios
+          .post(
+            `https://arom-app-backend.herokuapp.com/recipe/${data._id}/upload`,
+            formData
+          )
+          .then(() => {
+            alert("Berhasil memasukkan resep baru!");
+          });
       });
+  };
+
+  handleFileChange = event => {
+    this.setState({
+      image: event.target.files[0]
+    });
   };
 
   render() {
@@ -140,6 +158,7 @@ export default class CreateRecipe extends React.Component {
                 onChange={this.handleNameChange}
               />
             </Form.Field>
+
             <Label size="large">Deskripsi</Label>
             <Form.Field>
               <TextArea
@@ -149,6 +168,11 @@ export default class CreateRecipe extends React.Component {
                 onChange={this.handleDescriptionChange}
                 placeholder="jelasin dong masakan ini seperti apa.."
               />
+            </Form.Field>
+
+            <Form.Field>
+              <Label size="large">Gambar</Label>
+              <Input type="file" onChange={this.handleFileChange} />
             </Form.Field>
             <Label size="large">Harga Masakan Jadi</Label>
             <Form.Field>
