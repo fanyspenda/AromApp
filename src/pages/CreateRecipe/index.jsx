@@ -131,6 +131,7 @@ export default class CreateRecipe extends React.Component {
           )
           .then(() => {
             alert("Berhasil memasukkan resep baru!");
+            this.props.history.push('/')
           });
       });
   };
@@ -153,35 +154,35 @@ export default class CreateRecipe extends React.Component {
             <Form.Field>
               <Input
                 fluid
-                value={this.state.name}
+                value={ this.state.name }
                 placeholder="Mau nulis resep apa?"
-                onChange={this.handleNameChange}
+                onChange={ this.handleNameChange }
               />
             </Form.Field>
 
             <Label size="large">Deskripsi</Label>
             <Form.Field>
               <TextArea
-                style={{ resize: "none" }}
+                style={ { resize: "none" } }
                 rows="5"
-                value={this.state.description}
-                onChange={this.handleDescriptionChange}
+                value={ this.state.description }
+                onChange={ this.handleDescriptionChange }
                 placeholder="jelasin dong masakan ini seperti apa.."
               />
             </Form.Field>
 
             <Form.Field>
               <Label size="large">Gambar</Label>
-              <Input type="file" onChange={this.handleFileChange} />
+              <Input type="file" onChange={ this.handleFileChange } />
             </Form.Field>
             <Label size="large">Harga Masakan Jadi</Label>
             <Form.Field>
               <Input
                 fluid
-                value={this.state.price}
+                value={ this.state.price }
                 type="number"
                 placeholder="Harga jadinya berapa ya?"
-                onChange={this.handlePriceCompleteChange}
+                onChange={ this.handlePriceCompleteChange }
               />
             </Form.Field>
             <br />
@@ -198,30 +199,30 @@ export default class CreateRecipe extends React.Component {
                     size="medium"
                     color="blue"
                     icon="plus"
-                    onClick={this.handleAddIngredientClick}
+                    onClick={ this.handleAddIngredientClick }
                   />
-                  {this.state.ingredients.length > 1 ? (
+                  { this.state.ingredients.length > 1 ? (
                     <Button
                       circular
                       floated="right"
                       size="medium"
                       color="red"
                       icon="minus"
-                      onClick={this.handleDeleteIngredientClick}
+                      onClick={ this.handleDeleteIngredientClick }
                     />
-                  ) : null}
+                  ) : null }
                 </Grid.Column>
               </Grid.Row>
 
-              {this.state.ingredients.map((ingredient, index) => (
-                <Grid.Row key={index}>
+              { this.state.ingredients.map((ingredient, index) => (
+                <Grid.Row key={ index }>
                   <Grid.Column>
                     <Input
                       fluid
                       label="Bahan"
-                      value={ingredient.name}
+                      value={ ingredient.name }
                       placeholder="bahan apa yang mau ditambahkan?"
-                      onChange={event =>
+                      onChange={ event =>
                         this.handleIngredientChange(event, index)
                       }
                     />
@@ -231,12 +232,12 @@ export default class CreateRecipe extends React.Component {
                       fluid
                       label="Harga"
                       type="number"
-                      value={ingredient.price}
-                      onChange={event => this.handlePriceChange(event, index)}
+                      value={ ingredient.price }
+                      onChange={ event => this.handlePriceChange(event, index) }
                     />
                   </Grid.Column>
                 </Grid.Row>
-              ))}
+              )) }
               {/* <Grid.Column>
                   <Input fluid label="Bahan" />
                 </Grid.Column>
@@ -255,32 +256,32 @@ export default class CreateRecipe extends React.Component {
                     size="medium"
                     color="blue"
                     icon="plus"
-                    onClick={this.handleAddStepClick}
+                    onClick={ this.handleAddStepClick }
                   />
-                  {this.state.steps.length > 1 ? (
+                  { this.state.steps.length > 1 ? (
                     <Button
                       circular
                       floated="right"
                       size="medium"
                       color="red"
                       icon="minus"
-                      onClick={this.handleDeleteStepClick}
+                      onClick={ this.handleDeleteStepClick }
                     />
-                  ) : null}
+                  ) : null }
                 </Grid.Column>
               </Grid.Row>
             </Grid>
             <br />
-            {this.state.steps.map((step, index) => (
+            { this.state.steps.map((step, index) => (
               <Form.Field>
                 <Input
-                  label={index + 1}
-                  value={step}
-                  onChange={event => this.handleStepChange(event, index)}
+                  label={ index + 1 }
+                  value={ step }
+                  onChange={ event => this.handleStepChange(event, index) }
                   placeholder="langkah apa selanjutnya?"
                 />
               </Form.Field>
-            ))}
+            )) }
             <br />
             <br />
             <Form.Field>
@@ -289,7 +290,7 @@ export default class CreateRecipe extends React.Component {
                 size="huge"
                 color="red"
                 icon="minus"
-                onClick={this.handleSubmitClick}
+                onClick={ this.handleSubmitClick }
               >
                 Tambahkan Resep
               </Button>
